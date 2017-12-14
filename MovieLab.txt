@@ -1,0 +1,76 @@
+* Name: Jerry Lee  *
+* SID: 95436717    *
+* Assignment: 5    *
+* Date: 12/1/2017  *
+====================
+
+Programs Functionality:
+
+This program is an extension of the previous  programs,
+implementing additional functions that filter pixels of images and 
+puts multiple images together as a list of frames, making a short
+movie editor. 
+
+The program takes movie inputs in a YUV format, then performs 
+operations on the "movie". If filter operations are to be applied,
+the movie will be first converted to RGB for each individual frame
+and then the operations will perform the modifications on each
+frame individually. Once complete for every frame, the movie will
+then be converted back to YUV format and saved into an output
+movie file. 
+
+Function Implementations:
+NewImageEntry   - Creates a new entry with pointers to the previous
+                  and next entry. Each entry contains a pointer to 
+                  a RGBImage and YUVImage, with atleast one of the
+                  two pointing to NULL at all times. 
+
+CreateImageList - Creates a list of entries pointing to each other
+                  using the Prev and Next capabilities.
+
+DeleteImageList - Deletes the entire list, calling DeleteEntry.
+
+AppendRGBImage  - Adds an entry with an RGB image to the list of
+                  entries. One frame of the movie.
+
+AppendYUVImage  - Adds an entry with an YUV image to the list of
+                  entries. One frame of the movie.
+
+CreateMovie     - Creates a movie with frames. The frames are a 
+                  list of entries.
+
+DeleteMovie     - Deletes the entire movie, including every image,
+                  entry, list, and movie.
+
+YUV2RGBMovie    - Converts the pixels of a YUV image to RGB.
+                  Saves it as a RGB image in the entry.
+    
+RGB2YUVMovie    - Converts the pixels of a RGB image to YUV.
+                  Saves it as a YUV image in the entry.
+
+LoadMovie       - Loads a YUV movie and makes a list with each entry
+                  containing the individual frames (yuv images).
+
+Spotlight       - Using the circle equation, calculates the distance
+                  between each point and the center of the image.
+                  If the calculated distance is smaller than the
+                  given radius, then the pixels are turned black,
+                  giving it the image of a circle forming in each
+                  image. Each iteration, the radius size is changed.
+
+Errors:
+
+Using GDB and Valgrind, the program has been thoroughly checked for
+erros. No leaks are possible. The program executes each operation
+as it should with inputs given in the proper format and assuming
+the inputs are valid. The functions also individually account for
+errors and will either handle the inputs without errors or output
+a error message, prompting the user to re-enter the input.
+
+Conclusion:
+
+The program operates as expected but was programmed with brute force
+so each operation that requires to edit an RGB image takes a decent
+amount of time. The time complexity is O(N^3) to convert all the 
+frames from YUV to RGB and vice versa. Runtime is noticeably slower
+when running the executable but does not affect the results.  

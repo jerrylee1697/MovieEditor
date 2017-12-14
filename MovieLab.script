@@ -1,0 +1,89 @@
+Script started on Tue 05 Dec 2017 08:35:59 AM PST
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ make
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c DIPs.c -o DIPs.o
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c  FileIO.c -o FileIO.o
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c Image.c -o Image.o
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c ImageList.c -o ImageList.o
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c Movie.c -o Movie.o
+gcc -Wall -ansi -std=c99 -g -DDEBUG -c -g -DDEBUG MovieLab.c -o MovieLab.o
+gcc -lm -Wall -ansi -std=c99 -g -DDEBUG -g -DDEBUG DIPs.o FileIO.o Image.o ImageList.o Movie.o MovieLab.o -o MovieLab
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -h
+
+Usage: MovieLab -i <file> -o <file> -f <framenum> -s <WIDTHxHEIGHT> [options]
+Options:
+-aging                Activate the aging filter on every movie frame
+-hflip                Activate horizontal flip on every movie frame
+-edge                 Activate the edge filter on every movie frame
+-crop <start-end>     Crop the movie frames from <start> to <end>
+-fast <factor>        Fast forward the movie by <factor>
+-reverse              Reverse the frame order of the input movie
+-watermark <file>     Add a watermark from <file> to every movie frame
+-spotlight            Spotlight the fade in and fade out
+-zoom                 Zoom in and out the input movie
+-h                    Display this usage information
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 50 -s 480x270 -aging -hflip
+The movie file mouse.yuv has been read successfully!
+Operation Aging is done!
+Operation HFlip is done!
+The movie file out.yuv has been written successfully!
+50 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 50 -s 480x270 -aging -hflip[K[K[K[K[K[K[K[K[K[K[Kedge
+The movie file mouse.yuv has been read successfully!
+Operation Edge is done!
+The movie file out.yuv has been written successfully!
+50 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 50 -s 480x270 -edge[K[K[K[K[P[1@80 -s 480x270 -fast 3 -crop 10-40[P[1@1[1@4
+The movie file mouse.yuv has been read successfully!
+Operation Fast Forward is done! New number of frames is 47.
+Operation Crop is done! New number of frames is 31.
+The movie file out.yuv has been written successfully!
+31 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 140 -s 480x270 -fast 3 -crop 10-400[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kreverse[P[P[1@5
+The movie file mouse.yuv has been read successfully!
+Operation Reverse is done!
+The movie file out.yuv has been written successfully!
+50 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 50 -s 480x270 -reverse[K[K[K[K[K[K[Kwae[Ktermark -[Kwatermark.ppm
+The movie file mouse.yuv has been read successfully!
+watermark.ppm was read successfully!
+Operation Watermark is done!
+The movie file out.yuv has been written successfully!
+50 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 50 -s 480x270 -watermark watermark.ppm[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kspotlight[P[1@8
+The movie file mouse.yuv has been read successfully!
+Operation Spotlight is done!
+The movie file out.yuv has been written successfully!
+80 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 80 -s 480x270 -spotlight[K[K[K[K[K[K[K[K[K[K0[P[P[1@1[1@4[1@6[1@v[1@a[1@l[1@g[1@r[1@i[1@n[1@d[1@ 
+==42697== Memcheck, a memory error detector
+==42697== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==42697== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==42697== Command: ./MovieLab -i mouse.yuv -o out.yuv -f 146 -s 480x270
+==42697== 
+The movie file mouse.yuv has been read successfully!
+The movie file out.yuv has been written successfully!
+146 frames are written to the file out.yuv in total.
+==42697== 
+==42697== HEAP SUMMARY:
+==42697==     in use at exit: 0 bytes in 0 blocks
+==42697==   total heap usage: 879 allocs, 879 frees, 56,858,840 bytes allocated
+==42697== 
+==42697== All heap blocks were freed -- no leaks are possible
+==42697== 
+==42697== For counts of detected and suppressed errors, rerun with: -v
+==42697== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 8 from 6)
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ./MovieLab -i mouse.yuv -o out.yuv -f 100 -s 480x270 -zoom
+The movie file mouse.yuv has been read successfully!
+Operation Zoom is done!
+The movie file out.yuv has been written successfully!
+100 frames are written to the file out.yuv in total.
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ make clean
+rm -f MovieLab
+rm -f *.o
+rm -f out.yuv
+]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ ls
+Constants.h  DIPs.c  DIPs.h  FileIO.c  FileIO.h  Image.c  Image.h  ImageList.c  ImageList.h  Makefile  [0m[01;36mmouse.yuv[0m  Movie.c  Movie.h  MovieLab.c  MovieLab.script  MovieLab.txt  SaveMovie.c  typescript  [01;35mwatermark.ppm[0m
+[m]0;jerrl10@bondi:~/hw5[jerrl10@bondi ~/hw5]$ exit
+exit
+
+Script done on Tue 05 Dec 2017 08:40:31 AM PST
